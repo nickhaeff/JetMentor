@@ -22,4 +22,17 @@
         android:name="com.example.jetmentor.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_scout"
+        android:name="com.example.jetmentor.ui.scout.ScoutFragment"
+        android:label="@string/title_scout"
+        tools:layout="@layout/fragment_scout" />
+
+    <fragment
+        android:id="@+id/navigation_settings"
+        android:name="com.example.jetmentor.ui.settings.SettingsFragment"
+        android:label="@string/title_settings"
+        tools:layout="@layout/fragment_settings" />
+
 </navigation>
