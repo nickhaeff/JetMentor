@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name='BNA'
+rootProject.name='JetMentor'
