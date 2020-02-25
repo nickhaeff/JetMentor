@@ -10,7 +10,7 @@ public class ScoutViewModel extends ViewModel {
 
     public ScoutViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is scout fragment");
+        mText.setValue("Mentors are found here.");
     }
 
     public LiveData<String> getText() {
