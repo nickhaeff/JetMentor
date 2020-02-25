@@ -9,4 +9,9 @@
     <string name="title_forum">Forum</string>
     <string name="title_mentors">Mentors</string>
     <string name="title_scout">Scout</string>
+    <string name="title_activity_view_profile">Profile</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            In hendrerit odio ac posuere convallis. Quisque ultricies nisl quam, vel malesuada
+                            justo euismod vel. Maecenas sapien enim, euismod nec erat molestie, pretium tincidunt
+                            nibh.</string>
 </resources>
