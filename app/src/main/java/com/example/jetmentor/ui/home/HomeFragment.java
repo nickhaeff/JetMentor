@@ -18,6 +18,8 @@ public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
 
+    String mockTitles[], mockUsers[], mockDates[], mockCommentCounts[];
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
@@ -30,6 +32,12 @@ public class HomeFragment extends Fragment {
                 textView.setText(s);
             }
         });
+
+        mockTitles = getResources().getStringArray(R.array.mockTitles);
+        mockUsers = getResources().getStringArray(R.array.mockUsers);
+        mockDates = getResources().getStringArray(R.array.mockDates);
+        mockCommentCounts = getResources().getStringArray(R.array.mockCommentCounts);
+
         return root;
     }
 }
