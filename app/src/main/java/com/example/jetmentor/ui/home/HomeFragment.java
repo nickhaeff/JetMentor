@@ -11,12 +11,16 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jetmentor.R;
 
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
+
+    RecyclerView postsRecyclerView;
 
     String mockTitles[], mockUsers[], mockDates[], mockCommentCounts[];
 
@@ -33,10 +37,16 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        postsRecyclerView = root.findViewById(R.id.postsRecyclerView);
+
         mockTitles = getResources().getStringArray(R.array.mockTitles);
         mockUsers = getResources().getStringArray(R.array.mockUsers);
         mockDates = getResources().getStringArray(R.array.mockDates);
         mockCommentCounts = getResources().getStringArray(R.array.mockCommentCounts);
+
+        MyAdapter myAdapter = new MyAdapter( root.getContext(), mockTitles, mockUsers, mockDates, mockCommentCounts);
+        postsRecyclerView.setAdapter(myAdapter);
+        postsRecyclerView.setLayoutManager(new LinearLayoutManager(root.getContext()));
 
         return root;
     }
