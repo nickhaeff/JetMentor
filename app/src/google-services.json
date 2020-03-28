@@ -8,17 +8,54 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:534542340472:android:db816fc5b142ce8dfab88d",
+        "mobilesdk_app_id": "1:534542340472:android:e489c2fccd81e171fab88d",
         "android_client_info": {
-          "package_name": "com.pd.chatapp"
+          "package_name": "com.example.jetmentor"
         }
       },
       "oauth_client": [
         {
-          "client_id": "534542340472-v0881agkl4j23c85oirebc7ldgofmiuk.apps.googleusercontent.com",
+          "client_id": "534542340472-4fdlgoch8r7sh3fdb56hu3adthu0ijt3.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.pd.chatapp",
+            "package_name": "com.example.jetmentor",
+            "certificate_hash": "763c76bff09aa3c17e67e36b12c625f973c96b91"
+          }
+        },
+        {
+          "client_id": "534542340472-g1j942afti0k0galmhgje61hvehkba4n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5oXFDkkjA3W_f1MbfmnXONa8PPiLN96s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "534542340472-g1j942afti0k0galmhgje61hvehkba4n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:534542340472:android:63ba408841044fd6fab88d",
+        "android_client_info": {
+          "package_name": "com.google.firebase.quickstart.auth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "534542340472-iop5856cr33m9v9n7mstt5eic1u2fv3k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.google.firebase.quickstart.auth",
             "certificate_hash": "763c76bff09aa3c17e67e36b12c625f973c96b91"
           }
         },

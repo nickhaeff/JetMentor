@@ -32,7 +32,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class loginActivity extends BaseActivity implements
+public class EmailPasswordActivity extends BaseActivity implements
         View.OnClickListener {
 
     private static final String TAG = "EmailPassword";
@@ -103,7 +103,7 @@ public class loginActivity extends BaseActivity implements
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(loginActivity.this, "Authentication failed.",
+                            Toast.makeText(EmailPasswordActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
                         }
@@ -137,11 +137,11 @@ public class loginActivity extends BaseActivity implements
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(loginActivity.this, "Authentication failed.",
+                            Toast.makeText(EmailPasswordActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
                             // [START_EXCLUDE]
-                            // checkForMultiFactorFailure(task.getException());
+                            //checkForMultiFactorFailure(task.getException());
                             // [END_EXCLUDE]
                         }
 
@@ -177,12 +177,12 @@ public class loginActivity extends BaseActivity implements
                         findViewById(R.id.verifyEmailButton).setEnabled(true);
 
                         if (task.isSuccessful()) {
-                            Toast.makeText(loginActivity.this,
+                            Toast.makeText(EmailPasswordActivity.this,
                                     "Verification email sent to " + user.getEmail(),
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             Log.e(TAG, "sendEmailVerification", task.getException());
-                            Toast.makeText(loginActivity.this,
+                            Toast.makeText(EmailPasswordActivity.this,
                                     "Failed to send verification email.",
                                     Toast.LENGTH_SHORT).show();
                         }
@@ -198,12 +198,12 @@ public class loginActivity extends BaseActivity implements
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
                     updateUI(mAuth.getCurrentUser());
-                    Toast.makeText(loginActivity.this,
+                    Toast.makeText(EmailPasswordActivity.this,
                             "Reload successful!",
                             Toast.LENGTH_SHORT).show();
                 } else {
                     Log.e(TAG, "reload", task.getException());
-                    Toast.makeText(loginActivity.this,
+                    Toast.makeText(EmailPasswordActivity.this,
                             "Failed to reload user.",
                             Toast.LENGTH_SHORT).show();
                 }
