@@ -15,5 +15,47 @@
                             justo euismod vel. Maecenas sapien enim, euismod nec erat molestie, pretium tincidunt
                             nibh.</string>
     
-    <string-array name="profile"
+    <string-array name="mockProfileNames">
+        <item>mentor1</item>
+        <item>mentor2</item>
+        <item>mentor3</item>
+        <item>mentor4</item>
+        <item>mentor5</item>
+        <item>mentor6</item>
+        <item>mentor7</item>
+        <item>mentor8</item>
+        <item>mentor9</item>
+        <item>mentor10</item>
+        <item>mentor11</item>
+    </string-array>
+
+    <string-array name="mockProfileCompanies">
+        <item>company1</item>
+        <item>company2</item>
+        <item>company3</item>
+        <item>company4</item>
+        <item>company5</item>
+        <item>company6</item>
+        <item>company7</item>
+        <item>company8</item>
+        <item>company9</item>
+        <item>company10</item>
+        <item>company11</item>
+    </string-array>
+
+    <string-array name="mockProfilePositions">
+        <item>position1</item>
+        <item>position2</item>
+        <item>position3</item>
+        <item>position4</item>
+        <item>position5</item>
+        <item>position6</item>
+        <item>position7</item>
+        <item>position8</item>
+        <item>position9</item>
+        <item>position10</item>
+        <item>position11</item>
+    </string-array>
+
+
 </resources>

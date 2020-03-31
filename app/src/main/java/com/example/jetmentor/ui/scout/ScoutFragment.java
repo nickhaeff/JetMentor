@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jetmentor.R;
 import com.example.jetmentor.ui.settings.SettingsViewModel;
@@ -18,6 +19,9 @@ import com.example.jetmentor.ui.settings.SettingsViewModel;
 public class ScoutFragment extends Fragment {
 
     private ScoutViewModel scoutViewModel;
+
+    RecyclerView scoutMentorsRV;
+    String mockUsers[], mockCompanies[], mockPositions[];
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -31,6 +35,14 @@ public class ScoutFragment extends Fragment {
                 textView.setText(s);
             }
         });
+
+        scoutMentorsRV = root.findViewById(R.id.scoutMentorsRV);
+        mockUsers = getResources().getStringArray(R.array.mockProfileNames);
+        mockCompanies = getResources().getStringArray(R.array.mockProfileCompanies);
+        mockPositions = getResources().getStringArray(R.array.mockProfilePositions);
+
+        ScoutMentorsRVAdapter scoutMentorsRVAdapter = new ScoutMentorsRVAdapter(root.getContext(), mockUsers, mockCompanies, mockPositions);
+
         return root;
     }
 }
