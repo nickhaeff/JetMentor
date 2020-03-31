@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jetmentor.R;
@@ -42,6 +43,8 @@ public class ScoutFragment extends Fragment {
         mockPositions = getResources().getStringArray(R.array.mockProfilePositions);
 
         ScoutMentorsRVAdapter scoutMentorsRVAdapter = new ScoutMentorsRVAdapter(root.getContext(), mockUsers, mockCompanies, mockPositions);
+        scoutMentorsRV.setAdapter(scoutMentorsRVAdapter);
+        scoutMentorsRV.setLayoutManager(new LinearLayoutManager(root.getContext()));
 
         return root;
     }
