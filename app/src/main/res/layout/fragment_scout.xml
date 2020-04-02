@@ -17,7 +17,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_searchScout" />
+        app:layout_constraintTop_toBottomOf="@+id/et_searchScout"
+        android:gravity="center_horizontal" />
 
     <EditText
         android:id="@+id/et_searchScout"
@@ -29,4 +30,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/scoutMentorsRV"
+        android:layout_width="match_parent"
+        android:layout_height="512dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/et_searchScout"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
