@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "754881967431-0ua1kp305it4u1gomju2ggjeb1am4amm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.jetmentor",
+            "certificate_hash": "219caf04b20e7e63db4938bd39f79564f7676356"
+          }
+        },
+        {
           "client_id": "754881967431-mtfn8q8al04r3gu8c7i3dn0af1k9m91h.apps.googleusercontent.com",
           "client_type": 3
         }
