@@ -1,6 +1,7 @@
 package com.example.jetmentor.ui.scout;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,17 +12,27 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jetmentor.R;
 
+import java.util.Arrays;
+
 public class ScoutMentorsRVAdapter extends RecyclerView.Adapter<ScoutMentorsRVAdapter.ScoutMentorsRVVH> {
 
     Context scoutMentorContext;
     String users[], companies[], positions[];
 
     public ScoutMentorsRVAdapter(Context ct, String inUsers[], String inCompanies[], String inPositions[]) {
+
         scoutMentorContext = ct;
         users = inUsers;
         companies = inCompanies;
         positions = inPositions;
     }
+
+    public void updateScoutMentors(String inUsers[], String inCompanies[], String inPositions[]) {
+        users = inUsers;
+        companies = inCompanies;
+        positions = inPositions;
+    }
+
 
     @NonNull
     @Override
