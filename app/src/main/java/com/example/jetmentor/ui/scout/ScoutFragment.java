@@ -110,29 +110,6 @@ public class ScoutFragment extends Fragment {
 
                 String searchText = s.toString();
 
-//                int[] includedIndeces = new int[mockUsers.length];
-//                int total = 0;
-//                for(int i = 0; i<mockUsers.length; i++){
-//                    if(mockUsers[i].contains(searchText) || mockCompanies[i].contains(searchText) || mockPositions[i].contains(searchText)||searchText.equals("")){
-//                        includedIndeces[total] = i;
-//                        total++;
-//                    }
-//                }
-//                includedIndeces = Arrays.copyOf(includedIndeces, total);
-//
-//                String updatedUsers[], updatedCompanies[], updatedPositions[];
-//
-//                updatedUsers = new String[total];
-//                updatedCompanies = new String[total];
-//                updatedPositions = new String[total];
-//
-//
-//                for (int i = 0; i < total; i++){
-//                    updatedUsers[i] = mockUsers[includedIndeces[i]];
-//                    updatedCompanies[i] = mockCompanies[includedIndeces[i]];
-//                    updatedPositions[i] = mockPositions[includedIndeces[i]];
-//                }
-//
                 String updates[][] = ScoutFragment.ContentSearch(searchText, mockUsers, mockCompanies, mockPositions);
 
                 scoutMentorsRVAdapter.updateScoutMentors(updates[0], updates[1], updates[2]);
