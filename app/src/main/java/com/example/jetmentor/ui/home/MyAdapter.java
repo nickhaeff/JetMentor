@@ -9,11 +9,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.jetmentor.ForumPost;
 import com.example.jetmentor.R;
+
+import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
-    String data1[], data2[], data3[], data4[];
+    private List<ForumPost> postList;
     Context context;
     private OnItemClickListener mListener;
 
@@ -25,12 +28,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         mListener = listener;
     }
 
-    public MyAdapter(Context ct, String titles[], String users[], String dates[], String commentCounts[]){
+    public MyAdapter(Context ct, List<ForumPost> p){
         context = ct;
-        data1 = titles;
-        data2 = users;
-        data3 = dates;
-        data4 = commentCounts;
+        postList = p;
     }
 
     @NonNull
@@ -43,15 +43,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.title.setText(data1[position]);
-        holder.user.setText(data2[position]);
-        holder.date.setText(data3[position]);
-        holder.commentCount.setText(data4[position]);
+        holder.title.setText(postList.get(position).getTitle());
+        holder.user.setText(postList.get(position).getUser());
+        holder.date.setText(postList.get(position).getDate());
+        //holder.commentCount.setText(postList.get(position).getCommentCount());
     }
 
     @Override
     public int getItemCount() {
-        return data1.length;
+        return postList.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
