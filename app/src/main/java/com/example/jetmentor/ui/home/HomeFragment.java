@@ -38,14 +38,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-      /*  final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
-*/
+
         buildRecyclerView(root);
 
         btnCreatePost = (Button) root.findViewById(R.id.forum_create_post_btn);
@@ -77,22 +70,24 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                     }
                 });
 
-
-                postsRecyclerView.setLayoutManager(new LinearLayoutManager(root.getContext()));
+        postsRecyclerView.setLayoutManager(new LinearLayoutManager(root.getContext(), LinearLayoutManager.VERTICAL, false));
 
         myAdapter.setOnItemClickListener(new MyAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 Intent intent = new Intent(getActivity(), openForumPostActivity.class);
-                intent.putExtra("title", mockTitles[position]);
-                intent.putExtra("user", mockUsers[position]);
-                intent.putExtra("date", mockDates[position]);
-                intent.putExtra("commentCount", mockCommentCounts[position]);
+                intent.putExtra("title", postList.get(position).getTitle());
+                intent.putExtra("user",  postList.get(position).getUser());
+                intent.putExtra("body", postList.get(position).getBody());
+            //    intent.putExtra("date",  postList.get(position).getDate());
+            //    intent.putExtra("commentCount", postList.get(position).getCommentCount());
+
+
+             //   intent.putExtra("post", postList.get(position));
+
                 startActivity(intent);
             }
         });
-
-
     }
 
 
