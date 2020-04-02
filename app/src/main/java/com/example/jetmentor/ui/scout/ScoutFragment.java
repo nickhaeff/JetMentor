@@ -22,7 +22,41 @@ import com.example.jetmentor.ui.settings.SettingsViewModel;
 
 import java.util.Arrays;
 
+
+
 public class ScoutFragment extends Fragment {
+
+    public static String[][] ContentSearch(String searchText, String param1[], String param2[], String param3[])
+    {
+
+        int[] includedIndeces = new int[param1.length];
+        int total = 0;
+        for(int i = 0; i<param1.length; i++){
+            if(param1[i].contains(searchText) || param2[i].contains(searchText) || param3[i].contains(searchText)||searchText.equals("")){
+                includedIndeces[total] = i;
+                total++;
+            }
+        }
+        includedIndeces = Arrays.copyOf(includedIndeces, total);
+
+        String updatedUsers[], updatedCompanies[], updatedPositions[];
+
+        updatedUsers = new String[total];
+        updatedCompanies = new String[total];
+        updatedPositions = new String[total];
+
+
+        for (int i = 0; i < total; i++){
+            updatedUsers[i] = param1[includedIndeces[i]];
+            updatedCompanies[i] = param2[includedIndeces[i]];
+            updatedPositions[i] = param3[includedIndeces[i]];
+        }
+
+
+        String ans[][] = {updatedUsers, updatedCompanies, updatedPositions};
+
+        return ans;
+    }
 
     private ScoutViewModel scoutViewModel;
 
@@ -69,34 +103,39 @@ public class ScoutFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
+
+
+                //Take in string , 3 params, return updated/filtered params
+
+
                 String searchText = s.toString();
 
-                int[] includedIndeces = new int[mockUsers.length];
-                int total = 0;
-                for(int i = 0; i<mockUsers.length; i++){
-                    if(mockUsers[i].contains(searchText) || mockCompanies[i].contains(searchText) || mockPositions[i].contains(searchText)||searchText.equals("")){
-                        includedIndeces[total] = i;
-                        total++;
-                    }
-                }
-                includedIndeces = Arrays.copyOf(includedIndeces, total);
+//                int[] includedIndeces = new int[mockUsers.length];
+//                int total = 0;
+//                for(int i = 0; i<mockUsers.length; i++){
+//                    if(mockUsers[i].contains(searchText) || mockCompanies[i].contains(searchText) || mockPositions[i].contains(searchText)||searchText.equals("")){
+//                        includedIndeces[total] = i;
+//                        total++;
+//                    }
+//                }
+//                includedIndeces = Arrays.copyOf(includedIndeces, total);
+//
+//                String updatedUsers[], updatedCompanies[], updatedPositions[];
+//
+//                updatedUsers = new String[total];
+//                updatedCompanies = new String[total];
+//                updatedPositions = new String[total];
+//
+//
+//                for (int i = 0; i < total; i++){
+//                    updatedUsers[i] = mockUsers[includedIndeces[i]];
+//                    updatedCompanies[i] = mockCompanies[includedIndeces[i]];
+//                    updatedPositions[i] = mockPositions[includedIndeces[i]];
+//                }
+//
+                String updates[][] = ScoutFragment.ContentSearch(searchText, mockUsers, mockCompanies, mockPositions);
 
-                String updatedUsers[], updatedCompanies[], updatedPositions[];
-
-                updatedUsers = new String[total];
-                updatedCompanies = new String[total];
-                updatedPositions = new String[total];
-
-
-                for (int i = 0; i < total; i++){
-                    updatedUsers[i] = mockUsers[includedIndeces[i]];
-                    updatedCompanies[i] = mockCompanies[includedIndeces[i]];
-                    updatedPositions[i] = mockPositions[includedIndeces[i]];
-                }
-
-
-
-                scoutMentorsRVAdapter.updateScoutMentors(updatedUsers, updatedCompanies, updatedPositions);
+                scoutMentorsRVAdapter.updateScoutMentors(updates[0], updates[1], updates[2]);
                 scoutMentorsRV.setAdapter(scoutMentorsRVAdapter);
 
             }
