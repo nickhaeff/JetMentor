@@ -15,6 +15,8 @@ public class ForumPost {
     public ForumPost(String title, String body){
         this.title = title;
         this.body = body;
+        date = "4/1";
+        user = "phil";
     }
 
     public ForumPost(String title, String body, String user, int commentCount, int id){
