@@ -56,6 +56,33 @@ public class EmailPasswordTest {
     }
 
     @Test
+    public void failedCreateAccountTest() {
+        String email = "test";
+        String password = "pass";
+
+        // Make sure we're signed out
+        signOutIfPossible();
+
+        // Enter email
+        enterEmail(email);
+
+        // Enter password
+        enterPassword(password);
+
+        // Click sign in
+        ViewInteraction appCompatButton = onView(
+                allOf(withId(R.id.emailCreateAccountButton), withText(R.string.create_account),
+                        withParent(withId(R.id.emailPasswordButtons)),
+                        isDisplayed()));
+        appCompatButton.perform(click());
+
+        // Check that auth failed
+        onView(withText(R.string.auth_failed))
+                .check(matches(isDisplayed()));
+    }
+
+
+    @Test
     public void failedSignInTest() {
         String email = "test@test.com";
         String password = "123456";

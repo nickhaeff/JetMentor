@@ -110,6 +110,9 @@ public class loginActivity extends BaseActivity implements
                         }
 
                         // [START_EXCLUDE]
+                        if (!task.isSuccessful()) {
+                            mStatusTextView.setText(R.string.auth_failed);
+                        }
                         hideProgressBar();
                         // [END_EXCLUDE]
                     }
