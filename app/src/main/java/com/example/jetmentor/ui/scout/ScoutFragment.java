@@ -32,7 +32,7 @@ import java.util.List;
 
 public class ScoutFragment extends Fragment {
 
-    public static String[][] ContentSearch(String searchText, List<mentorInfo> inMentorsList)
+    public static List<mentorInfo> ContentSearch(String searchText, List<mentorInfo> inMentorsList)
     {
 
         int[] includedIndeces = new int[inMentorsList.size()];
@@ -59,9 +59,18 @@ public class ScoutFragment extends Fragment {
         }
 
 
-        String ans[][] = {updatedUsers, updatedCompanies, updatedPositions};
+        String updates[][] = {updatedUsers, updatedCompanies, updatedPositions};
 
-        return ans;
+        List<mentorInfo> updatedList = new ArrayList<>();
+
+
+        for(int i = 0; i < updates[0].length; i++)
+        {
+            updatedList.add((new mentorInfo(updates[0][i],updates[1][i],updates[2][i])));
+        }
+
+
+        return updatedList;
     }
 
     private ScoutViewModel scoutViewModel;
@@ -110,9 +119,9 @@ public class ScoutFragment extends Fragment {
 
                 String searchText = s.toString();
 
-                String updates[][] = ScoutFragment.ContentSearch(searchText, mentorsList);
+                List<mentorInfo> updatedList = ScoutFragment.ContentSearch(searchText, mentorsList);
 
-                scoutMentorsRVAdapter.updateScoutMentors(mentorsList);
+                scoutMentorsRVAdapter.updateScoutMentors(updatedList);
                 scoutMentorsRV.setAdapter(scoutMentorsRVAdapter);
 
             }
