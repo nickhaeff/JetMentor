@@ -12,6 +12,7 @@
         <activity android:name=".createForumPostActivity"></activity>
         <activity android:name=".openForumPostActivity" />
         <activity android:name=".viewProfileActivity" />
+        <activity android:name=".editMentorDetailsActivity" />
         <activity android:name=".loginActivity" />
         <activity
             android:name=".landingStrip"
