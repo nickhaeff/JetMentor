@@ -18,21 +18,27 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jetmentor.R;
+import com.example.jetmentor.ui.mentorInfo;
 import com.example.jetmentor.ui.settings.SettingsViewModel;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-
+import java.util.List;
 
 
 public class ScoutFragment extends Fragment {
 
-    public static String[][] ContentSearch(String searchText, String param1[], String param2[], String param3[])
+    public static List<mentorInfo> ContentSearch(String searchText, List<mentorInfo> inMentorsList)
     {
 
-        int[] includedIndeces = new int[param1.length];
+        int[] includedIndeces = new int[inMentorsList.size()];
         int total = 0;
-        for(int i = 0; i<param1.length; i++){
-            if(param1[i].contains(searchText) || param2[i].contains(searchText) || param3[i].contains(searchText)||searchText.equals("")){
+        for(int i = 0; i<inMentorsList.size(); i++){
+            if(inMentorsList.get(i).getName().contains(searchText) || inMentorsList.get(i).getCompany().contains(searchText) || inMentorsList.get(i).getPosition().contains(searchText)||searchText.equals("")){
                 includedIndeces[total] = i;
                 total++;
             }
@@ -47,23 +53,33 @@ public class ScoutFragment extends Fragment {
 
 
         for (int i = 0; i < total; i++){
-            updatedUsers[i] = param1[includedIndeces[i]];
-            updatedCompanies[i] = param2[includedIndeces[i]];
-            updatedPositions[i] = param3[includedIndeces[i]];
+            updatedUsers[i] = inMentorsList.get(includedIndeces[i]).getName();
+            updatedCompanies[i] = inMentorsList.get(includedIndeces[i]).getCompany();
+            updatedPositions[i] = inMentorsList.get(includedIndeces[i]).getPosition();
         }
 
 
-        String ans[][] = {updatedUsers, updatedCompanies, updatedPositions};
+        String updates[][] = {updatedUsers, updatedCompanies, updatedPositions};
 
-        return ans;
+        List<mentorInfo> updatedList = new ArrayList<>();
+
+
+        for(int i = 0; i < updates[0].length; i++)
+        {
+            updatedList.add((new mentorInfo(updates[0][i],updates[1][i],updates[2][i])));
+        }
+
+
+        return updatedList;
     }
 
     private ScoutViewModel scoutViewModel;
 
     private TextView et_searchScout;
 
-    RecyclerView scoutMentorsRV;
-    String mockUsers[], mockCompanies[], mockPositions[];
+    private RecyclerView scoutMentorsRV;
+    private List<mentorInfo> mentorsList;
+    private FirebaseFirestore db;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -80,15 +96,8 @@ public class ScoutFragment extends Fragment {
 
         et_searchScout = root.findViewById(R.id.et_searchScout);
 
+        final ScoutMentorsRVAdapter scoutMentorsRVAdapter = buildRecyclerView(root);
 
-        scoutMentorsRV = root.findViewById(R.id.scoutMentorsRV);
-        mockUsers = getResources().getStringArray(R.array.mockProfileNames);
-        mockCompanies = getResources().getStringArray(R.array.mockProfileCompanies);
-        mockPositions = getResources().getStringArray(R.array.mockProfilePositions);
-
-        final ScoutMentorsRVAdapter scoutMentorsRVAdapter = new ScoutMentorsRVAdapter(root.getContext(), mockUsers, mockCompanies, mockPositions);
-        scoutMentorsRV.setAdapter(scoutMentorsRVAdapter);
-        scoutMentorsRV.setLayoutManager(new LinearLayoutManager(root.getContext()));
 
         et_searchScout.addTextChangedListener(new TextWatcher() {
             @Override
@@ -110,13 +119,44 @@ public class ScoutFragment extends Fragment {
 
                 String searchText = s.toString();
 
-                String updates[][] = ScoutFragment.ContentSearch(searchText, mockUsers, mockCompanies, mockPositions);
+                List<mentorInfo> updatedList = ScoutFragment.ContentSearch(searchText, mentorsList);
 
-                scoutMentorsRVAdapter.updateScoutMentors(updates[0], updates[1], updates[2]);
+                scoutMentorsRVAdapter.updateScoutMentors(updatedList);
                 scoutMentorsRV.setAdapter(scoutMentorsRVAdapter);
 
             }
         });
         return root;
     }
+
+    public ScoutMentorsRVAdapter buildRecyclerView(View root)
+    {
+        scoutMentorsRV = root.findViewById(R.id.scoutMentorsRV);
+        mentorsList = new ArrayList<>();
+        final ScoutMentorsRVAdapter scoutMentorsRVAdapter = new ScoutMentorsRVAdapter(root.getContext(), mentorsList);
+        scoutMentorsRV.setAdapter(scoutMentorsRVAdapter);
+
+        db = FirebaseFirestore.getInstance();
+
+        db.collection("mentors").get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        if(!queryDocumentSnapshots.isEmpty()){
+                            List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                            for(DocumentSnapshot d : list){
+                                mentorInfo p = d.toObject(mentorInfo.class);
+                                mentorsList.add(p);
+                            }
+
+                            scoutMentorsRVAdapter.notifyDataSetChanged();
+                        }
+                    }
+                });
+
+        scoutMentorsRV.setLayoutManager(new LinearLayoutManager(root.getContext()));
+
+        return scoutMentorsRVAdapter;
+    }
+
 }

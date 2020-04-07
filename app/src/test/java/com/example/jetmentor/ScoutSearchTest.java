@@ -1,8 +1,13 @@
 package com.example.jetmentor;
 
+import com.example.jetmentor.ui.mentorInfo;
 import com.example.jetmentor.ui.scout.ScoutFragment;
 
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class ScoutSearchTest {
@@ -14,16 +19,28 @@ public class ScoutSearchTest {
         String list3[] = {"junk", "june", "junker"};
         String searchText = "pen";
 
-        String actual[][] = ScoutFragment.ContentSearch(searchText, list1, list2, list3);
+        List<mentorInfo> actualMentorInfo = new ArrayList<>();
+        for(int i = 0; i < list1.length; i++)
+        {
+            actualMentorInfo.add((new mentorInfo(list1[i], list2[i], list3[i])));
+        }
+
+        ScoutFragment.ContentSearch(searchText, actualMentorInfo);
         String expected[][] = {list1, list2, list3};
 
-        assertEquals(actual[0].length, expected[0].length);
-
-        for(int index = 0; index < actual[0].length; index++)
+        List<mentorInfo> expectedMentorInfo = new ArrayList<>();
+        for(int i = 0; i < expected[0].length; i++)
         {
-            assertEquals(expected[0][index], actual[0][index]);
-            assertEquals(expected[1][index], actual[1][index]);
-            assertEquals(expected[2][index], actual[2][index]);
+            expectedMentorInfo.add((new mentorInfo(expected[0][i], expected[1][i], expected[2][i])));
+        }
+
+        assertEquals(expectedMentorInfo.size(), actualMentorInfo.size());
+
+        for(int index = 0; index < actualMentorInfo.size(); index++)
+        {
+            assertEquals(expectedMentorInfo.get(index).getName(), actualMentorInfo.get(index).getName());
+            assertEquals(expectedMentorInfo.get(index).getCompany(), actualMentorInfo.get(index).getCompany());
+            assertEquals(expectedMentorInfo.get(index).getPosition(), actualMentorInfo.get(index).getPosition());
         }
     }
 
@@ -37,16 +54,29 @@ public class ScoutSearchTest {
         String elist3[] = {"junk"};
         String searchText = "pen";
 
-        String actual[][] = ScoutFragment.ContentSearch(searchText, list1, list2, list3);
+
+        List<mentorInfo> actualMentorInfo = new ArrayList<>();
+        for(int i = 0; i < list1.length; i++)
+        {
+            actualMentorInfo.add((new mentorInfo(list1[i], list2[i], list3[i])));
+        }
+
+        actualMentorInfo = ScoutFragment.ContentSearch(searchText, actualMentorInfo);
         String expected[][] = {elist1, elist2, elist3};
 
-        assertEquals(actual[0].length, expected[0].length);
-
-        for(int index = 0; index < actual[0].length; index++)
+        List<mentorInfo> expectedMentorInfo = new ArrayList<>();
+        for(int i = 0; i < expected[0].length; i++)
         {
-            assertEquals(expected[0][index], actual[0][index]);
-            assertEquals(expected[1][index], actual[1][index]);
-            assertEquals(expected[2][index], actual[2][index]);
+            expectedMentorInfo.add((new mentorInfo(expected[0][i], expected[1][i], expected[2][i])));
+        }
+
+        assertEquals(expectedMentorInfo.size(), actualMentorInfo.size());
+
+        for(int index = 0; index < actualMentorInfo.size(); index++)
+        {
+            assertEquals(expectedMentorInfo.get(index).getName(), actualMentorInfo.get(index).getName());
+            assertEquals(expectedMentorInfo.get(index).getCompany(), actualMentorInfo.get(index).getCompany());
+            assertEquals(expectedMentorInfo.get(index).getPosition(), actualMentorInfo.get(index).getPosition());
         }
     }
 
@@ -60,17 +90,30 @@ public class ScoutSearchTest {
         String elist3[] = {"junker", "awdwad", "psenas", "qwweq", "qwewqc"};
         String searchText = "pen";
 
-        String actual[][] = ScoutFragment.ContentSearch(searchText, list1, list2, list3);
-        String expected[][] = {elist1, elist2, elist3};
-
-        assertEquals(actual[0].length, expected[0].length);
-
-
-        for(int index = 0; index < actual[0].length; index++)
+        List<mentorInfo> actualMentorInfo = new ArrayList<>();
+        for(int i = 0; i < list1.length; i++)
         {
-            assertEquals(expected[0][index], actual[0][index]);
-            assertEquals(expected[1][index], actual[1][index]);
-            assertEquals(expected[2][index], actual[2][index]);
+            actualMentorInfo.add((new mentorInfo(list1[i], list2[i], list3[i])));
+        }
+
+
+        actualMentorInfo = ScoutFragment.ContentSearch(searchText, actualMentorInfo);
+        String expected[][] = {elist1, elist2, elist3};
+        List<mentorInfo> expectedMentorInfo = new ArrayList<>();
+        for(int i = 0; i < expected[0].length; i++)
+        {
+            expectedMentorInfo.add((new mentorInfo(expected[0][i], expected[1][i], expected[2][i])));
+        }
+
+        assertEquals(expectedMentorInfo.size(), actualMentorInfo.size());
+
+
+
+        for(int index = 0; index < actualMentorInfo.size(); index++)
+        {
+            assertEquals(expectedMentorInfo.get(index).getName(), actualMentorInfo.get(index).getName());
+            assertEquals(expectedMentorInfo.get(index).getCompany(), actualMentorInfo.get(index).getCompany());
+            assertEquals(expectedMentorInfo.get(index).getPosition(), actualMentorInfo.get(index).getPosition());
         }
     }
 
@@ -84,17 +127,30 @@ public class ScoutSearchTest {
         String elist3[] = {};
         String searchText = "georgiapig";
 
-        String actual[][] = ScoutFragment.ContentSearch(searchText, list1, list2, list3);
-        String expected[][] = {elist1, elist2, elist3};
-
-        assertEquals(actual[0].length, expected[0].length);
-
-
-        for(int index = 0; index < actual[0].length; index++)
+        List<mentorInfo> actualMentorInfo = new ArrayList<>();
+        for(int i = 0; i < list1.length; i++)
         {
-            assertEquals(expected[0][index], actual[0][index]);
-            assertEquals(expected[1][index], actual[1][index]);
-            assertEquals(expected[2][index], actual[2][index]);
+            actualMentorInfo.add((new mentorInfo(list1[i], list2[i], list3[i])));
+        }
+
+
+        actualMentorInfo = ScoutFragment.ContentSearch(searchText, actualMentorInfo);
+        String expected[][] = {elist1, elist2, elist3};
+        List<mentorInfo> expectedMentorInfo = new ArrayList<>();
+        for(int i = 0; i < expected[0].length; i++)
+        {
+            expectedMentorInfo.add((new mentorInfo(expected[0][i], expected[1][i], expected[2][i])));
+        }
+
+        assertEquals(expectedMentorInfo.size(), actualMentorInfo.size());
+
+
+
+        for(int index = 0; index < actualMentorInfo.size(); index++)
+        {
+            assertEquals(expectedMentorInfo.get(index).getName(), actualMentorInfo.get(index).getName());
+            assertEquals(expectedMentorInfo.get(index).getCompany(), actualMentorInfo.get(index).getCompany());
+            assertEquals(expectedMentorInfo.get(index).getPosition(), actualMentorInfo.get(index).getPosition());
         }
     }
 
@@ -108,17 +164,31 @@ public class ScoutSearchTest {
         String elist3[] = {"junker", "awdwad", "psenas", "qwweq", "qwewqc"};
         String searchText = "pen";
 
-        String actual[][] = ScoutFragment.ContentSearch(searchText, list1, list2, list3);
-        String expected[][] = {elist1, elist2, elist3};
-
-        assertEquals(actual[0].length, expected[0].length);
-
-
-        for(int index = 0; index < actual[0].length; index++)
+        List<mentorInfo> actualMentorInfo = new ArrayList<>();
+        for(int i = 0; i < list1.length; i++)
         {
-            assertEquals(expected[0][index], actual[0][index]);
-            assertEquals(expected[1][index], actual[1][index]);
-            assertEquals(expected[2][index], actual[2][index]);
+            actualMentorInfo.add((new mentorInfo(list1[i], list2[i], list3[i])));
+        }
+
+
+        actualMentorInfo = ScoutFragment.ContentSearch(searchText, actualMentorInfo);
+        String expected[][] = {elist1, elist2, elist3};
+        List<mentorInfo> expectedMentorInfo = new ArrayList<>();
+
+        for(int i = 0; i < expected[0].length; i++)
+        {
+            expectedMentorInfo.add((new mentorInfo(expected[0][i], expected[1][i], expected[2][i])));
+        }
+
+        assertEquals(expectedMentorInfo.size(), actualMentorInfo.size());
+
+
+
+        for(int index = 0; index < actualMentorInfo.size(); index++)
+        {
+            assertEquals(expectedMentorInfo.get(index).getName(), actualMentorInfo.get(index).getName());
+            assertEquals(expectedMentorInfo.get(index).getCompany(), actualMentorInfo.get(index).getCompany());
+            assertEquals(expectedMentorInfo.get(index).getPosition(), actualMentorInfo.get(index).getPosition());
         }
     }
 
@@ -132,17 +202,31 @@ public class ScoutSearchTest {
         String elist3[] = {"junk", "june", "junker"};
         String searchText = "piz";
 
-        String actual[][] = ScoutFragment.ContentSearch(searchText, list1, list2, list3);
-        String expected[][] = {elist1, elist2, elist3};
-
-        assertEquals(actual[0].length, expected[0].length);
-
-
-        for(int index = 0; index < actual[0].length; index++)
+        List<mentorInfo> actualMentorInfo = new ArrayList<>();
+        for(int i = 0; i < list1.length; i++)
         {
-            assertEquals(expected[0][index], actual[0][index]);
-            assertEquals(expected[1][index], actual[1][index]);
-            assertEquals(expected[2][index], actual[2][index]);
+            actualMentorInfo.add((new mentorInfo(list1[i], list2[i], list3[i])));
+        }
+
+
+        actualMentorInfo = ScoutFragment.ContentSearch(searchText, actualMentorInfo);
+        String expected[][] = {elist1, elist2, elist3};
+        List<mentorInfo> expectedMentorInfo = new ArrayList<>();
+
+        for(int i = 0; i < expected[0].length; i++)
+        {
+            expectedMentorInfo.add((new mentorInfo(expected[0][i], expected[1][i], expected[2][i])));
+        }
+
+        assertEquals(expectedMentorInfo.size(), actualMentorInfo.size());
+
+
+
+        for(int index = 0; index < actualMentorInfo.size(); index++)
+        {
+            assertEquals(expectedMentorInfo.get(index).getName(), actualMentorInfo.get(index).getName());
+            assertEquals(expectedMentorInfo.get(index).getCompany(), actualMentorInfo.get(index).getCompany());
+            assertEquals(expectedMentorInfo.get(index).getPosition(), actualMentorInfo.get(index).getPosition());
         }
     }
 
@@ -156,17 +240,30 @@ public class ScoutSearchTest {
         String elist3[] = {"junk", "june", "junker"};
         String searchText = "jun";
 
-        String actual[][] = ScoutFragment.ContentSearch(searchText, list1, list2, list3);
-        String expected[][] = {elist1, elist2, elist3};
-
-        assertEquals(actual[0].length, expected[0].length);
-
-
-        for(int index = 0; index < actual[0].length; index++)
+        List<mentorInfo> actualMentorInfo = new ArrayList<>();
+        for(int i = 0; i < list1.length; i++)
         {
-            assertEquals(expected[0][index], actual[0][index]);
-            assertEquals(expected[1][index], actual[1][index]);
-            assertEquals(expected[2][index], actual[2][index]);
+            actualMentorInfo.add((new mentorInfo(list1[i], list2[i], list3[i])));
+        }
+
+        actualMentorInfo = ScoutFragment.ContentSearch(searchText, actualMentorInfo);
+        String expected[][] = {elist1, elist2, elist3};
+        List<mentorInfo> expectedMentorInfo = new ArrayList<>();
+
+        for(int i = 0; i < expected[0].length; i++)
+        {
+            expectedMentorInfo.add((new mentorInfo(expected[0][i], expected[1][i], expected[2][i])));
+        }
+
+        assertEquals(expectedMentorInfo.size(), actualMentorInfo.size());
+
+
+
+        for(int index = 0; index < actualMentorInfo.size(); index++)
+        {
+            assertEquals(expectedMentorInfo.get(index).getName(), actualMentorInfo.get(index).getName());
+            assertEquals(expectedMentorInfo.get(index).getCompany(), actualMentorInfo.get(index).getCompany());
+            assertEquals(expectedMentorInfo.get(index).getPosition(), actualMentorInfo.get(index).getPosition());
         }
     }
 

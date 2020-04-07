@@ -11,26 +11,25 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jetmentor.R;
+import com.example.jetmentor.ui.mentorInfo;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class ScoutMentorsRVAdapter extends RecyclerView.Adapter<ScoutMentorsRVAdapter.ScoutMentorsRVVH> {
 
     Context scoutMentorContext;
-    String users[], companies[], positions[];
+    private List<mentorInfo> mentorList;
 
-    public ScoutMentorsRVAdapter(Context ct, String inUsers[], String inCompanies[], String inPositions[]) {
+
+    public ScoutMentorsRVAdapter(Context ct, List<mentorInfo> inMentorList) {
 
         scoutMentorContext = ct;
-        users = inUsers;
-        companies = inCompanies;
-        positions = inPositions;
+        mentorList = inMentorList;
     }
 
-    public void updateScoutMentors(String inUsers[], String inCompanies[], String inPositions[]) {
-        users = inUsers;
-        companies = inCompanies;
-        positions = inPositions;
+    public void updateScoutMentors(List<mentorInfo> inMentorList) {
+        mentorList = inMentorList;
     }
 
 
@@ -44,14 +43,14 @@ public class ScoutMentorsRVAdapter extends RecyclerView.Adapter<ScoutMentorsRVAd
 
     @Override
     public void onBindViewHolder(@NonNull ScoutMentorsRVVH holder, int position) {
-        holder.user.setText(users[position]);
-        holder.company.setText(companies[position]);
-        holder.position.setText(positions[position]);
+        holder.user.setText(mentorList.get(position).getName());
+        holder.company.setText(mentorList.get(position).getCompany());
+        holder.position.setText(mentorList.get(position).getPosition());
     }
 
     @Override
     public int getItemCount() {
-        return users.length;
+        return mentorList.size();
     }
 
     public class ScoutMentorsRVVH extends RecyclerView.ViewHolder {
