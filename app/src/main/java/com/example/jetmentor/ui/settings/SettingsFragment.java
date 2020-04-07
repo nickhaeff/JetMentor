@@ -41,6 +41,15 @@ public class SettingsFragment extends Fragment {
             }
         });
 
+        final Intent intent1 = new Intent(getActivity(), com.example.jetmentor.editMentorDetailsActivity.class);
+        final Button editProfile = root.findViewById(R.id.edit_profile);
+
+        editProfile.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view){
+                startActivity(intent1);
+            }
+        });
+
         return root;
     }
 }
