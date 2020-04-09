@@ -16,6 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -35,7 +37,7 @@ public class editMentorDetailsActivity extends AppCompatActivity implements View
 
         SetupButtons();
         db = FirebaseFirestore.getInstance();
-        mentors = db.collection("mentors");
+        mentors = db.collection("mentorsExtended");
     }
 
     private void SetupButtons()
@@ -55,7 +57,22 @@ public class editMentorDetailsActivity extends AppCompatActivity implements View
         inYoe = findViewById(R.id.years_of_experience);
         inAvailability = findViewById(R.id.availability_input);
 
-        mentorInfo changedMentor = new mentorInfo(inName.getText().toString(), inCompany.getText().toString(), inPosition.getText().toString());
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+//        mentorInfo changedMentor = new mentorInfo(inName.getText().toString(), inCompany.getText().toString(), inPosition.getText().toString());
+        mentorInfo changedMentor = new mentorInfo(currentUser.getUid(), inName.getText().toString(), inCompany.getText().toString(), inPosition.getText().toString(), Double.parseDouble(inYoe.getText().toString()), inAvailability.isChecked());
+//        mentors.add(changedMentor).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+//            @Override
+//            public void onSuccess(DocumentReference documentReference) {
+//                Toast.makeText(editMentorDetailsActivity.this, "submitted changes", Toast.LENGTH_LONG).show();
+//            }
+//        }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception e) {
+//                Toast.makeText(editMentorDetailsActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+//            }
+//        });
         mentors.add(changedMentor).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {

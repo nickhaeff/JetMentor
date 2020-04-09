@@ -138,7 +138,7 @@ public class ScoutFragment extends Fragment {
 
         db = FirebaseFirestore.getInstance();
 
-        db.collection("mentors").get()
+        db.collection("mentorsExtended").get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
