@@ -20,7 +20,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.HashMap;
+import java.util.List;
 
 public class editMentorDetailsActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -58,24 +63,42 @@ public class editMentorDetailsActivity extends AppCompatActivity implements View
         inAvailability = findViewById(R.id.availability_input);
 
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        final FirebaseUser currentUser = mAuth.getCurrentUser();
 
-//        mentorInfo changedMentor = new mentorInfo(inName.getText().toString(), inCompany.getText().toString(), inPosition.getText().toString());
         mentorInfo changedMentor = new mentorInfo(currentUser.getUid(), inName.getText().toString(), inCompany.getText().toString(), inPosition.getText().toString(), Double.parseDouble(inYoe.getText().toString()), inAvailability.isChecked());
-//        mentors.add(changedMentor).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+
+
+//        mentors.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
 //            @Override
-//            public void onSuccess(DocumentReference documentReference) {
-//                Toast.makeText(editMentorDetailsActivity.this, "submitted changes", Toast.LENGTH_LONG).show();
+//            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+//                if(!queryDocumentSnapshots.isEmpty())
+//                {
+//                    List<DocumentSnapshot> docs = queryDocumentSnapshots.getDocuments();
+//                    for(DocumentSnapshot d : docs)
+//                    {
+//                        mentorInfo mentorDoc = d.toObject(mentorInfo.class);
+//                        if(mentorDoc.getUserId() == currentUser.getUid())
+//                        {
+//                            mentors.document(curr)
+//                        }
+//                    }
+//                }
 //            }
-//        }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception e) {
-//                Toast.makeText(editMentorDetailsActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-//            }
-//        });
-        mentors.add(changedMentor).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+//        })
+
+        HashMap<String, Object> mentorMap = new HashMap<String, Object>();
+        mentorMap.put("available", changedMentor.getAvailable());
+        mentorMap.put("company", changedMentor.getCompany());
+        mentorMap.put("message", "");
+        mentorMap.put("name", changedMentor.getName());
+        mentorMap.put("position", changedMentor.getPosition());
+        mentorMap.put("userId", changedMentor.getUserId());
+        mentorMap.put("yearsOfExperience", changedMentor.getYearsOfExperience());
+
+        mentors.document(changedMentor.getUserId()).set(mentorMap);
+        mentors.document(changedMentor.getUserId()).set(mentorMap).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
-            public void onSuccess(DocumentReference documentReference) {
+            public void onSuccess(Void aVoid) {
                 Toast.makeText(editMentorDetailsActivity.this, "submitted changes", Toast.LENGTH_LONG).show();
             }
         }).addOnFailureListener(new OnFailureListener() {
