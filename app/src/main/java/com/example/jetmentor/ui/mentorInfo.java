@@ -30,6 +30,7 @@ public class mentorInfo {
         message = inMessage;
     }
 
+
     public String getUserId(){return userId;}
     public String getName(){return name;}
     public String getCompany(){return company;}

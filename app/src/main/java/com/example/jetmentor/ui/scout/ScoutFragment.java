@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jetmentor.R;
+import com.example.jetmentor.openMentorDetailsActivity;
 import com.example.jetmentor.ui.mentorInfo;
 import com.example.jetmentor.ui.settings.SettingsFragment;
 import com.example.jetmentor.ui.settings.SettingsViewModel;
@@ -171,9 +172,14 @@ public class ScoutFragment extends Fragment {
         scoutMentorsRVAdapter.setOnItemClickListener(new ScoutMentorsRVAdapter.OnItemClickListener() {
             @Override
             public void onItemCLick(int position) {
-//                Intent nextIntent = new Intent(getActivity(), SettingsFragment.class);
-//                startActivity(nextIntent);
-                Toast.makeText(localContext, "working", Toast.LENGTH_LONG).show();
+                Intent nextIntent = new Intent(getActivity(), openMentorDetailsActivity.class);
+//                Toast.makeText(localContext, "working", Toast.LENGTH_LONG).show();
+                nextIntent.putExtra("clickedUserName", mentorsList.get(position).getName());
+                nextIntent.putExtra("clickedUserCompany", mentorsList.get(position).getCompany());
+                nextIntent.putExtra("clickedUserPosition", mentorsList.get(position).getPosition());
+                nextIntent.putExtra("clickedUserYoe", Double.toString(mentorsList.get(position).getYearsOfExperience()));
+                nextIntent.putExtra("clickedUserMessage", mentorsList.get(position).getMessage());
+                startActivity(nextIntent);
             }
         });
 
