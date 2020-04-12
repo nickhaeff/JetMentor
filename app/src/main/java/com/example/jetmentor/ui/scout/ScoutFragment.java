@@ -39,8 +39,11 @@ public class ScoutFragment extends Fragment {
         int total = 0;
         for(int i = 0; i<inMentorsList.size(); i++){
             if(inMentorsList.get(i).getName().contains(searchText) || inMentorsList.get(i).getCompany().contains(searchText) || inMentorsList.get(i).getPosition().contains(searchText)||searchText.equals("")){
-                includedIndeces[total] = i;
-                total++;
+                if(inMentorsList.get(i).getAvailable())
+                {
+                    includedIndeces[total] = i;
+                    total++;
+                }
             }
         }
         includedIndeces = Arrays.copyOf(includedIndeces, total);
@@ -126,6 +129,7 @@ public class ScoutFragment extends Fragment {
 
             }
         });
+
         return root;
     }
 
@@ -146,7 +150,10 @@ public class ScoutFragment extends Fragment {
                             List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
                             for(DocumentSnapshot d : list){
                                 mentorInfo p = d.toObject(mentorInfo.class);
-                                mentorsList.add(p);
+                                if(p.getAvailable())
+                                {
+                                    mentorsList.add(p);
+                                }
                             }
 
                             scoutMentorsRVAdapter.notifyDataSetChanged();
