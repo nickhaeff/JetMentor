@@ -30,7 +30,7 @@ import java.util.List;
 public class editMentorDetailsActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button submitChanges, cancelChanges;
-    private EditText inName, inCompany, inPosition, inYoe;
+    private EditText inName, inCompany, inPosition, inYoe, inMessage;
     private CheckBox inAvailability;
     private FirebaseFirestore db;
     private CollectionReference mentors;
@@ -61,30 +61,13 @@ public class editMentorDetailsActivity extends AppCompatActivity implements View
         inPosition = findViewById(R.id.position_input);
         inYoe = findViewById(R.id.years_of_experience);
         inAvailability = findViewById(R.id.availability_input);
+        inMessage = findViewById(R.id.mentor_message);
 
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         final FirebaseUser currentUser = mAuth.getCurrentUser();
 
-        mentorInfo changedMentor = new mentorInfo(currentUser.getUid(), inName.getText().toString(), inCompany.getText().toString(), inPosition.getText().toString(), Double.parseDouble(inYoe.getText().toString()), inAvailability.isChecked());
+        mentorInfo changedMentor = new mentorInfo(currentUser.getUid(), inName.getText().toString(), inCompany.getText().toString(), inPosition.getText().toString(), Double.parseDouble(inYoe.getText().toString()), inAvailability.isChecked(), inMessage.getText().toString());
 
-
-//        mentors.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-//            @Override
-//            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-//                if(!queryDocumentSnapshots.isEmpty())
-//                {
-//                    List<DocumentSnapshot> docs = queryDocumentSnapshots.getDocuments();
-//                    for(DocumentSnapshot d : docs)
-//                    {
-//                        mentorInfo mentorDoc = d.toObject(mentorInfo.class);
-//                        if(mentorDoc.getUserId() == currentUser.getUid())
-//                        {
-//                            mentors.document(curr)
-//                        }
-//                    }
-//                }
-//            }
-//        })
 
         HashMap<String, Object> mentorMap = new HashMap<String, Object>();
         mentorMap.put("available", changedMentor.getAvailable());
@@ -94,8 +77,8 @@ public class editMentorDetailsActivity extends AppCompatActivity implements View
         mentorMap.put("position", changedMentor.getPosition());
         mentorMap.put("userId", changedMentor.getUserId());
         mentorMap.put("yearsOfExperience", changedMentor.getYearsOfExperience());
+        mentorMap.put("message", changedMentor.getMessage());
 
-        mentors.document(changedMentor.getUserId()).set(mentorMap);
         mentors.document(changedMentor.getUserId()).set(mentorMap).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {

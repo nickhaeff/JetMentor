@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jetmentor.R;
+import com.example.jetmentor.ui.home.MyAdapter;
 import com.example.jetmentor.ui.mentorInfo;
 
 import java.util.Arrays;
@@ -20,6 +21,12 @@ public class ScoutMentorsRVAdapter extends RecyclerView.Adapter<ScoutMentorsRVAd
 
     Context scoutMentorContext;
     private List<mentorInfo> mentorList;
+    private OnItemClickListener mentorClickListener;
+
+    public interface OnItemClickListener
+    {
+        void onItemCLick(int position);
+    }
 
 
     public ScoutMentorsRVAdapter(Context ct, List<mentorInfo> inMentorList) {
@@ -32,6 +39,7 @@ public class ScoutMentorsRVAdapter extends RecyclerView.Adapter<ScoutMentorsRVAd
         mentorList = inMentorList;
     }
 
+    public void setOnItemClickListener(OnItemClickListener listener){ mentorClickListener = listener;}
 
     @NonNull
     @Override
@@ -63,6 +71,19 @@ public class ScoutMentorsRVAdapter extends RecyclerView.Adapter<ScoutMentorsRVAd
             user = itemView.findViewById(R.id.user);
             company = itemView.findViewById(R.id.company);
             position = itemView.findViewById(R.id.position);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(mentorClickListener != null)
+                    {
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION)
+                        {
+                            mentorClickListener.onItemCLick(position);
+                        }
+                    }
+                }
+            });
         }
     }
 }
