@@ -179,6 +179,7 @@ public class ScoutFragment extends Fragment {
                 nextIntent.putExtra("clickedUserPosition", mentorsList.get(position).getPosition());
                 nextIntent.putExtra("clickedUserYoe", Double.toString(mentorsList.get(position).getYearsOfExperience()));
                 nextIntent.putExtra("clickedUserMessage", mentorsList.get(position).getMessage());
+                nextIntent.putExtra("clickedUserId", mentorsList.get(position).getUserId());
                 startActivity(nextIntent);
             }
         });

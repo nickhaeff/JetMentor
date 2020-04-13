@@ -48,10 +48,32 @@
 
     <TextView
         android:id="@+id/mentors_message"
-        android:layout_width="347dp"
-        android:layout_height="258dp"
+        android:layout_width="350dp"
+        android:layout_height="189dp"
         android:layout_marginTop="16dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="@+id/company_name"
         app:layout_constraintTop_toBottomOf="@+id/company_name" />
+
+    <EditText
+        android:id="@+id/request_mentor_message"
+        android:layout_width="347dp"
+        android:layout_height="227dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:hint="Type message for potential mentor here."
+        app:layout_constraintStart_toStartOf="@+id/mentors_message"
+        app:layout_constraintTop_toBottomOf="@+id/mentors_message" />
+
+    <Button
+        android:id="@+id/request_mentorship_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Request Mentorship"
+        app:layout_constraintStart_toStartOf="@+id/request_mentor_message"
+        app:layout_constraintTop_toBottomOf="@+id/request_mentor_message" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
