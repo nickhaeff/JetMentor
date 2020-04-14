@@ -132,12 +132,6 @@ public class EmailPasswordTest {
         // Sign out button shown
         onView(allOf(withId(R.id.signOutButton), withText(R.string.sign_out), isDisplayed()));
 
-        // User email shown
-//        String emailString = mActivityTestRule.getActivity()
-//                .getString(R.string.emailpassword_status_fmt, email);
-//        onView(withText(emailString))
-//                .check(matches(isDisplayed()));
-
         // Sign out
         signOutIfPossible();
 
@@ -153,7 +147,7 @@ public class EmailPasswordTest {
         signInButton.perform(click());
 
         // User email shown // removing this because now we are on forum fragment
-        onView(withText("This is Forum fragment"))
+        onView(withText("JetMentor Forum"))
                 .check(matches(isDisplayed()));
     }
 
