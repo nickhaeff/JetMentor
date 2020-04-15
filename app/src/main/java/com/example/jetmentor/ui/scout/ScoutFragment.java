@@ -139,7 +139,7 @@ public class ScoutFragment extends Fragment {
         return root;
     }
 
-    public ScoutMentorsRVAdapter buildRecyclerView(View root)
+    private ScoutMentorsRVAdapter buildRecyclerView(View root)
     {
         final Context localContext = root.getContext();
         scoutMentorsRV = root.findViewById(R.id.scoutMentorsRV);
