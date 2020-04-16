@@ -2,18 +2,20 @@ package com.example.jetmentor;
 
 public class connectInfo {
 
-    private String docId, menteeId, mentorId, message;
+    private String docId, menteeId, mentorId, reqMessage, mentorEmail, menteeEmail;
     private int status;
 
     public connectInfo(){};
 
-    public connectInfo(String inMenteeId, String inMentorId, String inMessage, int inStatus)
+    public connectInfo(String inMenteeId, String inMentorId, String inMessage, int inStatus, String inMentorEmail, String inMenteeEmail)
     {
         docId = menteeId + mentorId;
         menteeId = inMenteeId;
         mentorId = inMentorId;
-        message = inMessage;
+        reqMessage = inMessage;
         status = inStatus;
+        mentorEmail = inMentorEmail;
+        menteeEmail = inMenteeEmail;
     }
 
     public void setDocId(String docId) {
@@ -28,8 +30,16 @@ public class connectInfo {
         this.mentorId = mentorId;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setMenteeEmail(String menteeEmail) {
+        this.menteeEmail = menteeEmail;
+    }
+
+    public void setMentorEmail(String mentorEmail) {
+        this.mentorEmail = mentorEmail;
+    }
+
+    public void setReqMessage(String message) {
+        this.reqMessage = message;
     }
 
     public void setStatus(int status) {
@@ -52,8 +62,16 @@ public class connectInfo {
         return mentorId;
     }
 
-    public String getMessage() {
-        return message;
+    public String getMenteeEmail() {
+        return menteeEmail;
+    }
+
+    public String getMentorEmail() {
+        return mentorEmail;
+    }
+
+    public String getReqMessage() {
+        return reqMessage;
     }
 
 }

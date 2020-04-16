@@ -2,7 +2,7 @@ package com.example.jetmentor.ui;
 
 public class mentorInfo {
 
-    private String userId, name, company, position, message;
+    private String userId, name, company, position, message, email;
     private double yearsOfExperience;
     private boolean available;
 
@@ -17,9 +17,10 @@ public class mentorInfo {
         yearsOfExperience = 0;
         available = false;
         message = "";
+        email = "";
     }
 
-    public mentorInfo(String inUserId, String inName, String inCompany, String inPosition, double inYearsOfExperience, boolean inAvailable, String inMessage)
+    public mentorInfo(String inUserId, String inName, String inCompany, String inPosition, double inYearsOfExperience, boolean inAvailable, String inMessage, String inEmail)
     {
         userId = inUserId;
         name = inName;
@@ -28,6 +29,7 @@ public class mentorInfo {
         yearsOfExperience = 0;
         available = inAvailable;
         message = inMessage;
+        email = inEmail;
     }
 
 
@@ -38,6 +40,7 @@ public class mentorInfo {
     public String getMessage(){return message;}
     public double getYearsOfExperience(){return yearsOfExperience;}
     public boolean getAvailable(){return available;}
+    public String getEmail(){return email;}
     public void setUserId(String inUserId){userId = inUserId;}
     public void setName(String inName){name = inName;}
     public void setCompany(String inCompany){company = inCompany;}
@@ -45,4 +48,5 @@ public class mentorInfo {
     public void setMessage(String inMessage){message = inMessage;}
     public void setYearsOfExperience(double inYearsOfExperience){yearsOfExperience = inYearsOfExperience;}
     public void setAvailable(boolean inAvailable){available = inAvailable;}
+    public void setEmail(String inEmail){email = inEmail;}
 }

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,7 +19,7 @@ public class openMentorDetailsActivity extends AppCompatActivity implements View
 
     private TextView user, company, position, yoe, message, requestMessage;
     private Button requestMentorship;
-    private String potMentorId;
+    private String potMentorId, potMentorEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -45,6 +46,8 @@ public class openMentorDetailsActivity extends AppCompatActivity implements View
 
         potMentorId = getIntent().getStringExtra("clickedUserId");
 
+        potMentorEmail = getIntent().getStringExtra("clickedUserEmail");
+
     }
 
     private void UploadRequest()
@@ -52,6 +55,7 @@ public class openMentorDetailsActivity extends AppCompatActivity implements View
         CollectionReference connects = FirebaseFirestore.getInstance().collection("connections");
 
         String potMenteeId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String menteeEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         String docId = potMenteeId + potMentorId;
         String reqMess = requestMessage.getText().toString();
 
@@ -60,6 +64,8 @@ public class openMentorDetailsActivity extends AppCompatActivity implements View
         reqMap.put("mentorId", potMentorId);
         reqMap.put("reqMessage", reqMess);
         reqMap.put("status", 1);
+        reqMap.put("mentorEmail", potMentorEmail);
+        reqMap.put("menteeEmail", menteeEmail);
 
         connects.document(docId).set(reqMap);
     }
@@ -69,6 +75,7 @@ public class openMentorDetailsActivity extends AppCompatActivity implements View
         if(v.getId() == R.id.request_mentorship_button)
         {
             Intent nextIntent = new Intent(this, landingStrip.class);
+            Toast.makeText(this, potMentorEmail, Toast.LENGTH_LONG);
             UploadRequest();
             startActivity(nextIntent);
         }

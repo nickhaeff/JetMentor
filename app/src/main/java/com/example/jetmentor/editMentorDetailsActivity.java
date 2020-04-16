@@ -66,18 +66,18 @@ public class editMentorDetailsActivity extends AppCompatActivity implements View
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         final FirebaseUser currentUser = mAuth.getCurrentUser();
 
-        mentorInfo changedMentor = new mentorInfo(currentUser.getUid(), inName.getText().toString(), inCompany.getText().toString(), inPosition.getText().toString(), Double.parseDouble(inYoe.getText().toString()), inAvailability.isChecked(), inMessage.getText().toString());
+        mentorInfo changedMentor = new mentorInfo(currentUser.getUid(), inName.getText().toString(), inCompany.getText().toString(), inPosition.getText().toString(), Double.parseDouble(inYoe.getText().toString()), inAvailability.isChecked(), inMessage.getText().toString(), currentUser.getEmail());
 
 
         HashMap<String, Object> mentorMap = new HashMap<String, Object>();
         mentorMap.put("available", changedMentor.getAvailable());
         mentorMap.put("company", changedMentor.getCompany());
-        mentorMap.put("message", "");
         mentorMap.put("name", changedMentor.getName());
         mentorMap.put("position", changedMentor.getPosition());
         mentorMap.put("userId", changedMentor.getUserId());
         mentorMap.put("yearsOfExperience", changedMentor.getYearsOfExperience());
         mentorMap.put("message", changedMentor.getMessage());
+        mentorMap.put("email", changedMentor.getEmail());
 
         mentors.document(changedMentor.getUserId()).set(mentorMap).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override

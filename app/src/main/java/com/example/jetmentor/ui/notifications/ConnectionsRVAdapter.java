@@ -43,7 +43,7 @@ public class ConnectionsRVAdapter extends RecyclerView.Adapter<ConnectionsRVAdap
 
     @Override
     public void onBindViewHolder(@NonNull ConnectionsRVVH holder, int position) {
-        holder.user.setText(connectionsList.get(position).getMenteeId());
+        holder.user.setText(connectionsList.get(position).getReqMessage());
     }
 
     @Override
