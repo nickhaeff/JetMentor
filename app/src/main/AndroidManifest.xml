@@ -11,7 +11,14 @@
         android:theme="@style/AppTheme">
         <activity android:name=".createForumPostActivity"></activity>
         <activity android:name=".openForumPostActivity" />
+        <activity android:name=".openMentorDetailsActivity" />
+        <activity android:name=".openConnectionDetailsActivity" />
+        <activity android:name=".openMPConnectionDetailsActivity" />
+        <activity android:name=".openEPConnectionDetailsActivity" />
+        <activity android:name=".openMCConnectionDetailsActivity" />
+        <activity android:name=".openECConnectionDetailsActivity" />
         <activity android:name=".viewProfileActivity" />
+        <activity android:name=".editMentorDetailsActivity" />
         <activity android:name=".loginActivity" />
         <activity
             android:name=".landingStrip"
