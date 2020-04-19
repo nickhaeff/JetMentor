@@ -1,4 +1,4 @@
-package com.example.jetmentor.ui.home;
+package com.example.jetmentor.ui.forum;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -14,7 +14,7 @@ import com.example.jetmentor.R;
 
 import java.util.List;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+public class ForumAdapter extends RecyclerView.Adapter<ForumAdapter.MyViewHolder> {
 
     private List<ForumPost> postList;
     Context context;
@@ -28,7 +28,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         mListener = listener;
     }
 
-    public MyAdapter(Context ct, List<ForumPost> p){
+    public ForumAdapter(Context ct, List<ForumPost> p){
         context = ct;
         postList = p;
     }
@@ -37,7 +37,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.my_row, parent, false);
+        View view = inflater.inflate(R.layout.forum_row, parent, false);
         return new MyViewHolder(view);
     }
 

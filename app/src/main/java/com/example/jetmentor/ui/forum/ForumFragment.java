@@ -1,4 +1,4 @@
-package com.example.jetmentor.ui.home;
+package com.example.jetmentor.ui.forum;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,9 +25,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFragment extends Fragment implements View.OnClickListener{
+public class ForumFragment extends Fragment implements View.OnClickListener{
 
-    private HomeViewModel homeViewModel;
+    private ForumViewModel homeViewModel;
     private RecyclerView postsRecyclerView;
     private String mockTitles[], mockUsers[], mockDates[], mockCommentCounts[];
     private Button btnCreatePost;
@@ -36,7 +36,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
+        homeViewModel = ViewModelProviders.of(this).get(ForumViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
         buildRecyclerView(root);
@@ -49,8 +49,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     public void buildRecyclerView(View root){
         postsRecyclerView = root.findViewById(R.id.postsRecyclerView);
         postList = new ArrayList<>();
-        final MyAdapter myAdapter = new MyAdapter( root.getContext(), postList);
-        postsRecyclerView.setAdapter(myAdapter);
+        final ForumAdapter forumAdapter = new ForumAdapter( root.getContext(), postList);
+        postsRecyclerView.setAdapter(forumAdapter);
 
         db = FirebaseFirestore.getInstance();
 
@@ -65,14 +65,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                                     postList.add(p);
                                 }
 
-                                myAdapter.notifyDataSetChanged();
+                                forumAdapter.notifyDataSetChanged();
                           }
                     }
                 });
 
         postsRecyclerView.setLayoutManager(new LinearLayoutManager(root.getContext(), LinearLayoutManager.VERTICAL, false));
 
-        myAdapter.setOnItemClickListener(new MyAdapter.OnItemClickListener() {
+        forumAdapter.setOnItemClickListener(new ForumAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 Intent intent = new Intent(getActivity(), openForumPostActivity.class);

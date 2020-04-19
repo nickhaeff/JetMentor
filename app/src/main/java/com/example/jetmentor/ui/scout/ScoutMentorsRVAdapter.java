@@ -1,7 +1,6 @@
 package com.example.jetmentor.ui.scout;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jetmentor.R;
-import com.example.jetmentor.ui.home.MyAdapter;
 import com.example.jetmentor.ui.mentorInfo;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class ScoutMentorsRVAdapter extends RecyclerView.Adapter<ScoutMentorsRVAdapter.ScoutMentorsRVVH> {
