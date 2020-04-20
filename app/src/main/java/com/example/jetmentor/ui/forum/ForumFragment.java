@@ -5,7 +5,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -22,17 +26,23 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class ForumFragment extends Fragment implements View.OnClickListener{
 
     private ForumViewModel homeViewModel;
     private RecyclerView postsRecyclerView;
-    private String mockTitles[], mockUsers[], mockDates[], mockCommentCounts[];
     private Button btnCreatePost;
+    private Spinner postSort;
     private FirebaseFirestore db;
     private List<ForumPost> postList;
+    private ForumAdapter forumAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -40,16 +50,93 @@ public class ForumFragment extends Fragment implements View.OnClickListener{
         View root = inflater.inflate(R.layout.fragment_forum, container, false);
 
         buildRecyclerView(root);
+        setUpButton(root);
+        setUpSpinner(root);
+        return root;
+    }
 
+    private void setUpButton(View root) {
         btnCreatePost = (Button) root.findViewById(R.id.forum_create_post_btn);
         btnCreatePost.setOnClickListener(this);
-        return root;
+    }
+
+    private void setUpSpinner(View root) {
+        postSort = (Spinner) root.findViewById(R.id.forum_sort_spinner);
+        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(getActivity(),
+                R.array.post_sorts, android.R.layout.simple_spinner_item);
+
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        postSort.setAdapter(spinnerAdapter);
+        postSort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch(position){
+                    case 0:
+                        sortNewest();
+                        forumAdapter.notifyDataSetChanged();
+                        break;
+                    case 1:
+                        sortOldest();
+                        forumAdapter.notifyDataSetChanged();
+                        break;
+                    case 2:
+                        sortAZ();
+                        forumAdapter.notifyDataSetChanged();
+                        break;
+                    case 3:
+                        sortZA();
+                        forumAdapter.notifyDataSetChanged();
+                        break;
+                    case 4:
+                        sortRandom();
+                        forumAdapter.notifyDataSetChanged();
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    private void sortNewest() {
+        Collections.sort(postList, new Comparator<ForumPost>(){
+            public int compare(ForumPost p1, ForumPost p2){
+                return p2.getDate().compareTo(p1.getDate());
+            }
+        });
+    }
+    private void sortOldest() {
+        Collections.sort(postList, new Comparator<ForumPost>(){
+            public int compare(ForumPost p1, ForumPost p2){
+                return p1.getDate().compareTo(p2.getDate());
+            }
+        });
+    }
+    private void sortAZ(){
+        Collections.sort(postList, new Comparator<ForumPost>() {
+            public int compare(ForumPost p1, ForumPost p2) {
+               return p1.getTitle().compareToIgnoreCase(p2.getTitle());
+            }
+        });
+    }
+    private void sortZA() {
+        Collections.sort(postList, new Comparator<ForumPost>() {
+            public int compare(ForumPost p1, ForumPost p2) {
+                return p2.getTitle().compareToIgnoreCase(p1.getTitle());
+            }
+        });
+    }
+    private void sortRandom() {
+        Collections.shuffle(postList);
     }
 
     public void buildRecyclerView(View root){
         postsRecyclerView = root.findViewById(R.id.postsRecyclerView);
         postList = new ArrayList<>();
-        final ForumAdapter forumAdapter = new ForumAdapter( root.getContext(), postList);
+        forumAdapter = new ForumAdapter( root.getContext(), postList);
         postsRecyclerView.setAdapter(forumAdapter);
 
         db = FirebaseFirestore.getInstance();
@@ -64,7 +151,7 @@ public class ForumFragment extends Fragment implements View.OnClickListener{
                                     ForumPost p = d.toObject(ForumPost.class);
                                     postList.add(p);
                                 }
-
+                                sortNewest();
                                 forumAdapter.notifyDataSetChanged();
                           }
                     }
@@ -89,7 +176,6 @@ public class ForumFragment extends Fragment implements View.OnClickListener{
             }
         });
     }
-
 
     @Override
     public void onClick(View v){
