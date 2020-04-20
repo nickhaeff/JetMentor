@@ -55,6 +55,50 @@ public class ForumFragment extends Fragment implements View.OnClickListener{
         return root;
     }
 
+    public void buildRecyclerView(View root){
+        postsRecyclerView = root.findViewById(R.id.postsRecyclerView);
+        postList = new ArrayList<>();
+        forumAdapter = new ForumAdapter( root.getContext(), postList);
+        postsRecyclerView.setAdapter(forumAdapter);
+
+        db = FirebaseFirestore.getInstance();
+
+        db.collection("posts").get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        if(!queryDocumentSnapshots.isEmpty()){
+                            List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                            for(DocumentSnapshot d : list){
+                                ForumPost p = d.toObject(ForumPost.class);
+                                postList.add(p);
+                            }
+                            sortNewest();
+                            forumAdapter.notifyDataSetChanged();
+                        }
+                    }
+                });
+
+        postsRecyclerView.setLayoutManager(new LinearLayoutManager(root.getContext(), LinearLayoutManager.VERTICAL, false));
+
+        forumAdapter.setOnItemClickListener(new ForumAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Intent intent = new Intent(getActivity(), openForumPostActivity.class);
+                intent.putExtra("title", postList.get(position).getTitle());
+                intent.putExtra("user",  postList.get(position).getUser());
+                intent.putExtra("body", postList.get(position).getBody());
+                //    intent.putExtra("date",  postList.get(position).getDate());
+                //    intent.putExtra("commentCount", postList.get(position).getCommentCount());
+
+
+                //   intent.putExtra("post", postList.get(position));
+
+                startActivity(intent);
+            }
+        });
+    }
+
     private void setUpButton(View root) {
         btnCreatePost = (Button) root.findViewById(R.id.forum_create_post_btn);
         btnCreatePost.setOnClickListener(this);
@@ -95,9 +139,7 @@ public class ForumFragment extends Fragment implements View.OnClickListener{
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
+            public void onNothingSelected(AdapterView<?> parent) {}
         });
     }
 
@@ -131,50 +173,6 @@ public class ForumFragment extends Fragment implements View.OnClickListener{
     }
     private void sortRandom() {
         Collections.shuffle(postList);
-    }
-
-    public void buildRecyclerView(View root){
-        postsRecyclerView = root.findViewById(R.id.postsRecyclerView);
-        postList = new ArrayList<>();
-        forumAdapter = new ForumAdapter( root.getContext(), postList);
-        postsRecyclerView.setAdapter(forumAdapter);
-
-        db = FirebaseFirestore.getInstance();
-
-        db.collection("posts").get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                          if(!queryDocumentSnapshots.isEmpty()){
-                                List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
-                                for(DocumentSnapshot d : list){
-                                    ForumPost p = d.toObject(ForumPost.class);
-                                    postList.add(p);
-                                }
-                                sortNewest();
-                                forumAdapter.notifyDataSetChanged();
-                          }
-                    }
-                });
-
-        postsRecyclerView.setLayoutManager(new LinearLayoutManager(root.getContext(), LinearLayoutManager.VERTICAL, false));
-
-        forumAdapter.setOnItemClickListener(new ForumAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                Intent intent = new Intent(getActivity(), openForumPostActivity.class);
-                intent.putExtra("title", postList.get(position).getTitle());
-                intent.putExtra("user",  postList.get(position).getUser());
-                intent.putExtra("body", postList.get(position).getBody());
-            //    intent.putExtra("date",  postList.get(position).getDate());
-            //    intent.putExtra("commentCount", postList.get(position).getCommentCount());
-
-
-             //   intent.putExtra("post", postList.get(position));
-
-                startActivity(intent);
-            }
-        });
     }
 
     @Override
