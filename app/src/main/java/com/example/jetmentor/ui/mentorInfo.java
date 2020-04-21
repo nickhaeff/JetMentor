@@ -26,7 +26,7 @@ public class mentorInfo {
         name = inName;
         company = inCompany;
         position = inPosition;
-        yearsOfExperience = 0;
+        yearsOfExperience = inYearsOfExperience;
         available = inAvailable;
         message = inMessage;
         email = inEmail;
