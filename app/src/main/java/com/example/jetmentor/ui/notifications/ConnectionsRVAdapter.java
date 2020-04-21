@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jetmentor.R;
 import com.example.jetmentor.connectInfo;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
@@ -43,7 +44,12 @@ public class ConnectionsRVAdapter extends RecyclerView.Adapter<ConnectionsRVAdap
 
     @Override
     public void onBindViewHolder(@NonNull ConnectionsRVVH holder, int position) {
-        holder.user.setText(connectionsList.get(position).getReqMessage());
+        String cuid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String disp = connectionsList.get(position).getMenteeEmail().substring(0, connectionsList.get(position).getMenteeEmail().indexOf('@'));
+        if(cuid.equals(connectionsList.get(position).getMenteeId())) {
+            disp = connectionsList.get(position).getMentorEmail().substring(0, connectionsList.get(position).getMentorEmail().indexOf('@'));
+        }
+        holder.user.setText(disp);
     }
 
     @Override
