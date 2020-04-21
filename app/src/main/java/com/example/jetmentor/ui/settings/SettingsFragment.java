@@ -28,9 +28,10 @@ public class SettingsFragment extends Fragment {
         settingsViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
-                textView.setText(s);
+                textView.setText("");
             }
         });
+
 
         final Intent intent = new Intent(getActivity(), com.example.jetmentor.viewProfileActivity.class);
         final Button viewProfile = root.findViewById(R.id.view_profile);
@@ -47,6 +48,24 @@ public class SettingsFragment extends Fragment {
         editProfile.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
                 startActivity(intent1);
+            }
+        });
+
+        final Intent aboutIntent = new Intent(getActivity(), com.example.jetmentor.aboutActivity.class);
+        final Button aboutButton = root.findViewById(R.id.about);
+
+        aboutButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view){
+                startActivity(aboutIntent);
+            }
+        });
+
+        final Intent supportIntent = new Intent(getActivity(), com.example.jetmentor.supportActivity.class);
+        final Button supportButton = root.findViewById(R.id.support);
+
+        supportButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view){
+                startActivity(supportIntent);
             }
         });
 
