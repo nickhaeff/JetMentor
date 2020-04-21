@@ -44,12 +44,12 @@
         android:id="@+id/commentsRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="56dp"
+        android:layout_marginTop="376dp"
+        android:layout_marginBottom="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/view_post_body"
         app:layout_constraintTop_toBottomOf="@+id/view_post_body" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

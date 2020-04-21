@@ -2,6 +2,7 @@ package com.example.jetmentor;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class ForumPost {
     private String title;
@@ -10,7 +11,7 @@ public class ForumPost {
     private String date;
     private int commentCount;
     private int id;
-    private String[] comments;
+    private List<String> comments;
 
     public ForumPost(){}
 
@@ -43,5 +44,5 @@ public class ForumPost {
     public int getId() {return id;}
     public void setId(int id) {this.id = id;}
     public String getDate() {return date;}
-    public String[] getComments() {return this.comments;}
+    public List<String> getComments() {return this.comments;}
 }
