@@ -10,6 +10,7 @@ public class ForumPost {
     private String date;
     private int commentCount;
     private int id;
+    private String[] comments;
 
     public ForumPost(){}
 
@@ -29,6 +30,7 @@ public class ForumPost {
         this.user = user;
         this.commentCount = commentCount;
         this.id = id;
+        this.comments = null;
 
         date = new SimpleDateFormat("MM/dd").format(new Date());
     }
@@ -41,4 +43,5 @@ public class ForumPost {
     public int getId() {return id;}
     public void setId(int id) {this.id = id;}
     public String getDate() {return date;}
+    public String[] getComments() {return this.comments;}
 }
