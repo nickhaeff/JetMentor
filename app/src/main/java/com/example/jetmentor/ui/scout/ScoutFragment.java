@@ -27,6 +27,7 @@ import com.example.jetmentor.ui.mentorInfo;
 import com.example.jetmentor.ui.settings.SettingsFragment;
 import com.example.jetmentor.ui.settings.SettingsViewModel;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -45,7 +46,7 @@ public class ScoutFragment extends Fragment {
         int total = 0;
         for(int i = 0; i<inMentorsList.size(); i++){
             if(inMentorsList.get(i).getName().contains(searchText) || inMentorsList.get(i).getCompany().contains(searchText) || inMentorsList.get(i).getPosition().contains(searchText)||searchText.equals("")){
-                if(inMentorsList.get(i).getAvailable())
+                if(inMentorsList.get(i).getAvailable()&&!((inMentorsList.get(i).getUserId()).equals(FirebaseAuth.getInstance().getCurrentUser().getUid())))
                 {
                     includedIndeces[total] = i;
                     total++;
@@ -157,7 +158,7 @@ public class ScoutFragment extends Fragment {
                             List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
                             for(DocumentSnapshot d : list){
                                 mentorInfo p = d.toObject(mentorInfo.class);
-                                if(p.getAvailable())
+                                if(p.getAvailable()&&!((p.getUserId()).equals(FirebaseAuth.getInstance().getCurrentUser().getUid())))
                                 {
                                     mentorsList.add(p);
                                 }
