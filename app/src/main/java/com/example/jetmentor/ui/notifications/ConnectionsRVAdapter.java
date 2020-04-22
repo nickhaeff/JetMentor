@@ -46,10 +46,13 @@ public class ConnectionsRVAdapter extends RecyclerView.Adapter<ConnectionsRVAdap
     public void onBindViewHolder(@NonNull ConnectionsRVVH holder, int position) {
         String cuid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         String disp = connectionsList.get(position).getMenteeEmail().substring(0, connectionsList.get(position).getMenteeEmail().indexOf('@'));
+        String labDisp = "mentee";
         if(cuid.equals(connectionsList.get(position).getMenteeId())) {
             disp = connectionsList.get(position).getMentorEmail().substring(0, connectionsList.get(position).getMentorEmail().indexOf('@'));
+            labDisp = "mentor";
         }
         holder.user.setText(disp);
+        holder.label.setText(labDisp);
     }
 
     @Override
@@ -59,11 +62,12 @@ public class ConnectionsRVAdapter extends RecyclerView.Adapter<ConnectionsRVAdap
 
     public class ConnectionsRVVH extends RecyclerView.ViewHolder {
 
-        TextView user;
+        TextView user, label;
 
         public ConnectionsRVVH(@NonNull View itemView) {
             super(itemView);
             user = itemView.findViewById(R.id.connection_user);
+            label = itemView.findViewById(R.id.ment_label);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
