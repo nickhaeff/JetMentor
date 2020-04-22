@@ -79,6 +79,15 @@ public class ForumFragment extends Fragment implements View.OnClickListener{
                 intent.putExtra("title", postList.get(position).getTitle());
                 intent.putExtra("user",  postList.get(position).getUser());
                 intent.putExtra("body", postList.get(position).getBody());
+                List<String> commentsArray = postList.get(position).getComments();
+                ArrayList<String> commentsArrayList;
+                if(commentsArray==null)
+                    commentsArrayList = new ArrayList<String>();
+                else
+                    commentsArrayList = new ArrayList<String>(commentsArray);
+
+
+                intent.putStringArrayListExtra("comments", commentsArrayList);
             //    intent.putExtra("date",  postList.get(position).getDate());
             //    intent.putExtra("commentCount", postList.get(position).getCommentCount());
 

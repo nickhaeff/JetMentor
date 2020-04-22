@@ -1,6 +1,7 @@
 package com.example.jetmentor;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class ForumPost {
         this.user = user;
         this.commentCount = commentCount;
         this.id = id;
-        this.comments = null;
+        this.comments = new ArrayList<>();
 
         date = new SimpleDateFormat("MM/dd").format(new Date());
     }

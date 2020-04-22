@@ -56,8 +56,6 @@ public class ForumCommentAdapter extends RecyclerView.Adapter<ForumCommentAdapte
 
         }
 
-        public TextView getComment() {
-            return comment;
-        }
+
     }
 }

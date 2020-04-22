@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.os.Debug;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -12,6 +13,7 @@ import com.example.jetmentor.ui.forum.ForumAdapter;
 import com.example.jetmentor.ui.forum.ForumCommentAdapter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class openForumPostActivity extends AppCompatActivity {
@@ -39,13 +41,19 @@ public class openForumPostActivity extends AppCompatActivity {
         body.setText(getIntent().getStringExtra("body"));
 
 
+//        String[] commentArray = getIntent().getStringArrayExtra("comments");
+//        Log.d("1", commentArray.toString());
+//        commentList = new ArrayList<String>(Arrays.asList(commentArray));
         commentList = new ArrayList<String>();
+        commentList = getIntent().getStringArrayListExtra("comments");
 
-        Log.d("yes ", "before");
+//        if(commentArray.length == 1)
+//            commentList.add(commentArray[0]);
+//
         final ForumCommentAdapter forumCommentsAdapter = new ForumCommentAdapter(getApplicationContext(), commentList);
         commentsRecyclerView.setAdapter(forumCommentsAdapter);
         commentsRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
-//        commentsRecyclerView.setLayoutManager(new LinearLayoutManager());
+
 
 
         return;
