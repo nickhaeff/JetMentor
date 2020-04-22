@@ -19,7 +19,7 @@
 
             <TextView
                 android:id="@+id/connection_user"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:text="TextView"
                 app:layout_constraintStart_toStartOf="parent"
@@ -28,6 +28,18 @@
                 android:layout_marginLeft="16dp"
                 android:textSize="18dp"
                 />
+
+            <TextView
+                android:id="@+id/ment_label"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="TextView"
+                app:layout_constraintStart_toEndOf="@id/connection_user"
+                app:layout_constraintTop_toTopOf="@id/connection_user"
+                android:layout_marginLeft="16dp"
+                android:textSize="18dp"
+                />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
