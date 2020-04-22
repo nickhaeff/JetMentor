@@ -40,21 +40,39 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view_post_title" />
 
-    <TextView
-        android:id="@+id/view_post_comment"
-        android:layout_width="374dp"
-        android:layout_height="104dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:text="Comments will go here"
-        android:textSize="24sp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/commentsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="376dp"
+        android:layout_marginBottom="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.38"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_post_body"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/view_post_body"
+        app:layout_constraintTop_toBottomOf="@+id/view_post_body" />
+
+    <EditText
+        android:id="@+id/newComment"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Add Comment"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="120dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/postCommentButton"
+        app:layout_constraintTop_toBottomOf="@+id/commentsRecyclerView"
         app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/postCommentButton"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:text="Post"
+        app:backgroundTint="#122980"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/commentsRecyclerView" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

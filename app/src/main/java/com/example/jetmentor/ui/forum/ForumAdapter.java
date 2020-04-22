@@ -46,7 +46,14 @@ public class ForumAdapter extends RecyclerView.Adapter<ForumAdapter.MyViewHolder
         holder.title.setText(postList.get(position).getTitle());
         holder.user.setText(postList.get(position).getUser());
         holder.date.setText(postList.get(position).getDate());
-        //holder.commentCount.setText(postList.get(position).getCommentCount());
+
+        int size;
+        if (postList.get(position).getComments() == null){
+            size = 0;
+        }else
+            size = postList.get(position).getComments().size();
+
+        holder.commentCount.setText(Integer.toString(size));
     }
 
     @Override
