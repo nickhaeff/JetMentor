@@ -2,6 +2,7 @@ package com.example.jetmentor.ui.forum;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,7 +62,12 @@ public class ForumFragment extends Fragment implements View.OnClickListener{
                           if(!queryDocumentSnapshots.isEmpty()){
                                 List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
                                 for(DocumentSnapshot d : list){
+                                    Log.d("T", d.getId());
+                                    d.get("key");
+
                                     ForumPost p = d.toObject(ForumPost.class);
+                                    p.setDocID(d.getId());
+
                                     postList.add(p);
                                 }
 
@@ -78,7 +84,9 @@ public class ForumFragment extends Fragment implements View.OnClickListener{
                 Intent intent = new Intent(getActivity(), openForumPostActivity.class);
                 intent.putExtra("title", postList.get(position).getTitle());
                 intent.putExtra("user",  postList.get(position).getUser());
-                intent.putExtra("body", postList.get(position).getBody());
+                intent.putExtra("body",  postList.get(position).getBody());
+                intent.putExtra("date",  postList.get(position).getDate());
+                intent.putExtra("docID", postList.get(position).getDocID());
                 List<String> commentsArray = postList.get(position).getComments();
                 ArrayList<String> commentsArrayList;
                 if(commentsArray==null)
@@ -86,6 +94,7 @@ public class ForumFragment extends Fragment implements View.OnClickListener{
                 else
                     commentsArrayList = new ArrayList<String>(commentsArray);
 
+                Log.d("date", postList.get(position).getDate());
 
                 intent.putStringArrayListExtra("comments", commentsArrayList);
             //    intent.putExtra("date",  postList.get(position).getDate());

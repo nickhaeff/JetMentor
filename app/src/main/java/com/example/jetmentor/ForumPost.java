@@ -12,6 +12,7 @@ public class ForumPost {
     private String date;
     private int commentCount;
     private int id;
+    private String docID;
     private List<String> comments;
 
     public ForumPost(){}
@@ -44,6 +45,9 @@ public class ForumPost {
     public int getCommentCount() {return commentCount;}
     public int getId() {return id;}
     public void setId(int id) {this.id = id;}
+    public void setDocID(String docID) {this.docID = docID;}
+    public String getDocID() {return docID;}
     public String getDate() {return date;}
+    public String setDate() {return date;}
     public List<String> getComments() {return this.comments;}
 }
