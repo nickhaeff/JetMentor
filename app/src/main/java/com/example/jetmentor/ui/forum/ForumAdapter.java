@@ -44,7 +44,7 @@ public class ForumAdapter extends RecyclerView.Adapter<ForumAdapter.MyViewHolder
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.title.setText(postList.get(position).getTitle());
-        holder.user.setText(postList.get(position).getUser());
+        //holder.user.setText(postList.get(position).getUser());
         holder.date.setText(postList.get(position).getDate());
 
         int size;
@@ -67,7 +67,7 @@ public class ForumAdapter extends RecyclerView.Adapter<ForumAdapter.MyViewHolder
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.postTitle);
-            user = itemView.findViewById(R.id.user);
+            //user = itemView.findViewById(R.id.user);
             date = itemView.findViewById(R.id.date);
             commentCount = itemView.findViewById(R.id.commentCount);
 
