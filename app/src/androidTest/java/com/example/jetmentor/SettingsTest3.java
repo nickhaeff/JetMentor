@@ -474,7 +474,7 @@ public class SettingsTest3 {
     @Test
     public void SettingsTest() {
 
-        // Verify scout allows
+        // Verify scout allows requesting mentor ships
 
         // Make sure we're signed out
         signOutIfPossible();
