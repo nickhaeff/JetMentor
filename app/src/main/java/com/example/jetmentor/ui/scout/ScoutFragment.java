@@ -39,14 +39,15 @@ import java.util.List;
 
 public class ScoutFragment extends Fragment {
 
-    public static List<mentorInfo> ContentSearch(String searchText, List<mentorInfo> inMentorsList)
+    public static List<mentorInfo> ContentSearch(String searchText, List<mentorInfo> inMentorsList, String fbauid)
     {
 
         int[] includedIndeces = new int[inMentorsList.size()];
         int total = 0;
         for(int i = 0; i<inMentorsList.size(); i++){
             if(inMentorsList.get(i).getName().contains(searchText) || inMentorsList.get(i).getCompany().contains(searchText) || inMentorsList.get(i).getPosition().contains(searchText)||searchText.equals("")){
-                if(inMentorsList.get(i).getAvailable()&&!((inMentorsList.get(i).getUserId()).equals(FirebaseAuth.getInstance().getCurrentUser().getUid())))
+                if(inMentorsList.get(i).getAvailable()&&!((inMentorsList.get(i).getUserId()).equals(fbauid)))
+//                if(inMentorsList.get(i).getAvailable()&&!((inMentorsList.get(i).getUserId()).equals(FirebaseAuth.getInstance().getCurrentUser().getUid())))
                 {
                     includedIndeces[total] = i;
                     total++;
@@ -129,7 +130,7 @@ public class ScoutFragment extends Fragment {
 
                 String searchText = s.toString();
 
-                List<mentorInfo> updatedList = ScoutFragment.ContentSearch(searchText, mentorsList);
+                List<mentorInfo> updatedList = ScoutFragment.ContentSearch(searchText, mentorsList, FirebaseAuth.getInstance().getCurrentUser().getUid());
 
                 scoutMentorsRVAdapter.updateScoutMentors(updatedList);
                 scoutMentorsRV.setAdapter(scoutMentorsRVAdapter);
