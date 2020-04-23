@@ -45,10 +45,21 @@ public class ConnectionsRVAdapter extends RecyclerView.Adapter<ConnectionsRVAdap
     @Override
     public void onBindViewHolder(@NonNull ConnectionsRVVH holder, int position) {
         String cuid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        String disp = connectionsList.get(position).getMenteeEmail().substring(0, connectionsList.get(position).getMenteeEmail().indexOf('@'));
+        String disp;
+        if(connectionsList.get(position).getMenteeEmail() == null){
+           return;
+        } else {
+            disp = connectionsList.get(position).getMenteeEmail().substring(0, connectionsList.get(position).getMenteeEmail().indexOf('@'));
+        }
+
         String labDisp = "mentee";
         if(cuid.equals(connectionsList.get(position).getMenteeId())) {
-            disp = connectionsList.get(position).getMentorEmail().substring(0, connectionsList.get(position).getMentorEmail().indexOf('@'));
+            if(connectionsList.get(position).getMentorEmail() == null){
+                return;
+            } else{
+                disp = connectionsList.get(position).getMentorEmail().substring(0, connectionsList.get(position).getMentorEmail().indexOf('@'));
+            }
+
             labDisp = "mentor";
         }
         holder.user.setText(disp);
